@@ -23,19 +23,20 @@ var count = 0;
 let users = [];
 
 io.on("connection", (socket) => {
-  var numClients = {};
+  let roomId;
 
   socket.on("joinlivestream", async (room) => {
     await socket.join(room.toString());
+    roomId = room;
     console.log(room);
     console.log(io.sockets.adapter.rooms.get(room).size);
     let roomSize = io.sockets.adapter.rooms.get(room).size;
     let details = {
       room: room,
-      roomSize,
-      roomSize,
+      roomSize: roomSize,
     };
     socket.emit("count", details);
+    io.to(room).emit("livecount", details);
     // socket.room = room;
     // if (numClients[room] == undefined) {
     //   numClients[room] = 1;
@@ -68,13 +69,17 @@ io.on("connection", (socket) => {
     //   }
   });
 
-  socket.emit("count", {
-    success: true,
-    num: count,
-  });
+  // socket.emit("count", {
+  //   success: true,
+  //   num: count,
+  // });
 
   socket.on("disconnect", () => {
     console.log("disconnected");
+    if (roomId != undefined) {
+      let roomSize = io.sockets.adapter.rooms.get(roomId).size;
+      io.to(roomId).emit("removecount", roomSize);
+    }
     // numClients[socket.room]--;
   });
 });
