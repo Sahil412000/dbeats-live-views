@@ -19,9 +19,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-var count = 0;
-let users = [];
-
 io.on("connection", (socket) => {
   let roomId;
 
@@ -37,42 +34,7 @@ io.on("connection", (socket) => {
     };
     socket.emit("count", details);
     io.to(room).emit("livecount", details);
-    // socket.room = room;
-    // if (numClients[room] == undefined) {
-    //   numClients[room] = 1;
-    // } else {
-    //   numClients[room]++;
-    // }
-    // console.log(numClients);
-    // if (io.sockets.adapter.rooms[username]) {
-    //   // result
-    //   console.log(io.sockets.adapter.rooms[username].length);
-    // }
-    //   const user = users.find((element) => {
-    //     if (username === element.username) {
-    //       return element;
-    //     }
-    //   });
-    //   if (user) {
-    //     for (let i = 0; i < users.length; i++) {
-    //       if (user.username === users[i].username) {
-    //         users[i].count++;
-    //     }
-    //   }
-    // }
-    //   else{
-    //     let temp = {
-    //       username: username,
-    //       count:1
-    //     }
-    //     users.push(temp);
-    //   }
   });
-
-  // socket.emit("count", {
-  //   success: true,
-  //   num: count,
-  // });
 
   socket.on("disconnect", () => {
     console.log("disconnected");
@@ -80,13 +42,8 @@ io.on("connection", (socket) => {
       let roomSize = io.sockets.adapter.rooms.get(roomId).size;
       io.to(roomId).emit("removecount", roomSize);
     }
-    // numClients[socket.room]--;
   });
 });
-
-// io.on("disconnect", (socket) => {
-//   console.log("User Disconnected", socket.id);
-// });
 
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
