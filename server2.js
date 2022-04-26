@@ -1,5 +1,5 @@
-// const express = require("express");
-// const app = express();
+  const express = require("express");
+  const app = express();
 // const server = require("http").createServer(app);
 // const port = process.env.PORT || 80;
 
@@ -10,6 +10,7 @@
 // server.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`);
 // });
+const cors = require("cors");
 
 const Room = require("./chat.model");
 const User = require("./user.model");
@@ -26,6 +27,9 @@ const io = require("socket.io")(PORT, {
   },
   allowEIO3: true,
 });
+
+app.use(cors());
+
 const uri = process.env["ATLAS_URI"];
 mongoose.connect(uri);
 
