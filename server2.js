@@ -23,14 +23,17 @@ const io = require("socket.io")(PORT, {
   cors: {
     origin: "*",
     transports: ["websocket"],
-    credentials: false,
-
+    credentials: true,
+    allowedHeaders: ["Access-Control-Allow-Origin"],
     methods: ["GET", "POST", "PUT"],
   },
   allowEIO3: true,
 });
 
 app.use(cors());
+app.get("/", (req, res) => {
+  res.send("Chat Server Working!");
+});
 
 const uri = process.env["ATLAS_URI"];
 mongoose.connect(uri);

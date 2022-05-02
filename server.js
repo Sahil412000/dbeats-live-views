@@ -8,8 +8,8 @@ const io = require("socket.io")(server, {
   cors: {
     origin: "*",
     transports: ["websocket"],
-    credentials: false,
-
+    credentials: true,
+    allowedHeaders: ["Access-Control-Allow-Origin"],
     methods: ["GET", "POST", "PUT"],
   },
   allowEIO3: true,
@@ -18,7 +18,7 @@ const io = require("socket.io")(server, {
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Live Viewer Working!");
 });
 
 io.on("connection", (socket) => {
