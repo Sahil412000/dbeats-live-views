@@ -6,7 +6,11 @@ const cors = require("cors");
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
+    origin: [
+      "http://localhost:*",
+      "https://beta.dbeats.live:*",
+      "https://dbeats.live:*",
+    ],
     transports: ["websocket"],
     credentials: true,
     allowedHeaders: ["Access-Control-Allow-Origin"],

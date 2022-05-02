@@ -21,7 +21,11 @@ dotenv.config();
 const PORT = 8080;
 const io = require("socket.io")(PORT, {
   cors: {
-    origin: "*",
+    origin: [
+      "http://localhost:*",
+      "https://beta.dbeats.live:*",
+      "https://dbeats.live:*",
+    ],
     transports: ["websocket"],
     credentials: true,
     allowedHeaders: ["Access-Control-Allow-Origin"],
