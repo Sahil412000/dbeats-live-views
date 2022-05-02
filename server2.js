@@ -23,8 +23,9 @@ const io = require("socket.io")(PORT, {
   cors: {
     origin: "*",
     transports: ["websocket"],
-    credentials: true,
-    methods: ["GET", "POST"],
+    credentials: false,
+
+    methods: ["GET", "POST", "PUT"],
   },
   allowEIO3: true,
 });

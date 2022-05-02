@@ -8,8 +8,9 @@ const io = require("socket.io")(server, {
   cors: {
     origin: "*",
     transports: ["websocket"],
-    credentials: true,
-    methods: ["GET", "POST"],
+    credentials: false,
+
+    methods: ["GET", "POST", "PUT"],
   },
   allowEIO3: true,
 });
