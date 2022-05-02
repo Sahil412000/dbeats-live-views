@@ -26,7 +26,7 @@ const io = require("socket.io")(PORT, {
       "https://beta.dbeats.live:*",
       "https://dbeats.live:*",
     ],
-    transports: ["websocket"],
+    transports: ["websocket", "polling"],
     credentials: true,
     allowedHeaders: ["Access-Control-Allow-Origin"],
     methods: ["GET", "POST", "PUT"],
