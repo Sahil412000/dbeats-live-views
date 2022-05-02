@@ -8,8 +8,8 @@ const io = require("socket.io")(server, {
   cors: {
     origin: [
       "http://localhost:*",
-      "https://beta.dbeats.live:*",
-      "https://dbeats.live:*",
+      "https://beta.dbeats.live ",
+      "https://dbeats.live ",
     ],
     transports: ["websocket", "polling"],
     credentials: true,
