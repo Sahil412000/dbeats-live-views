@@ -1,5 +1,5 @@
-  const express = require("express");
-  const app = express();
+const express = require("express");
+const app = express();
 // const server = require("http").createServer(app);
 // const port = process.env.PORT || 80;
 
@@ -18,12 +18,13 @@ const LiveRoom = require("./livechat.model");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
-const PORT = process.env.PORT || 80;
+const PORT = 8080;
 const io = require("socket.io")(PORT, {
   cors: {
     origin: "*",
     transports: ["websocket"],
     credentials: true,
+    methods: ["GET", "POST"],
   },
   allowEIO3: true,
 });

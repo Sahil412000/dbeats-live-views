@@ -9,6 +9,7 @@ const io = require("socket.io")(server, {
     origin: "*",
     transports: ["websocket"],
     credentials: true,
+    methods: ["GET", "POST"],
   },
   allowEIO3: true,
 });
