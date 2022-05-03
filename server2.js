@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const server = require("http").createServer(app);
+const port = process.env.PORT || 8080;
 // const server = require("http").createServer(app);
 // const port = process.env.PORT || 80;
 
@@ -18,8 +20,8 @@ const LiveRoom = require("./livechat.model");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
-const PORT = 8080;
-const io = require("socket.io")(PORT, {
+
+const io = require("socket.io")(server, {
   cors: {
     origin: [
       "http://localhost:*",
@@ -245,4 +247,8 @@ io.on("connection", (socket) => {
       console.log(error);
     }
   });
+});
+
+server.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
 });
