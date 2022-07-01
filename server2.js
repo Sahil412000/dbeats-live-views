@@ -29,19 +29,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const io = require("socket.io")(server, {
-//   cors: {
-//     origin: [
-//       "http://localhost:*",
-//       "https://beta.dbeats.live:*",
-//       "https://dbeats.live:*",
-//     ],
-//     transports: ["websocket", "polling"],
-//     credentials: true,
-//     allowedHeaders: ["Access-Control-Allow-Origin"],
-//     methods: ["GET", "POST", "PUT"],
-//   },
-//   allowEIO3: true,
-// });
+    cors: {
+       origin: '*',
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    },
+   allowEIO3: true,
+ });
  
 app.get("/", (req, res) => {
   res.send("Chat Server is Working!");
