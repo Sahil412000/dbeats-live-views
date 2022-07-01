@@ -21,24 +21,30 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const io = require("socket.io")(server, {
-  cors: {
-    origin: [
-      "http://localhost:*",
-      "https://beta.dbeats.live:*",
-      "https://dbeats.live:*",
-    ],
-    transports: ["websocket", "polling"],
-    credentials: true,
-    allowedHeaders: ["Access-Control-Allow-Origin"],
-    methods: ["GET", "POST", "PUT"],
-  },
-  allowEIO3: true,
-});
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+};
+// app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
 
-app.use(cors());
+const io = require("socket.io")(server, {
+//   cors: {
+//     origin: [
+//       "http://localhost:*",
+//       "https://beta.dbeats.live:*",
+//       "https://dbeats.live:*",
+//     ],
+//     transports: ["websocket", "polling"],
+//     credentials: true,
+//     allowedHeaders: ["Access-Control-Allow-Origin"],
+//     methods: ["GET", "POST", "PUT"],
+//   },
+//   allowEIO3: true,
+// });
+ 
 app.get("/", (req, res) => {
-  res.send("Chat Server Working!");
+  res.send("Chat Server is Working!");
 });
 
 const uri = process.env["ATLAS_URI"];
