@@ -2,9 +2,8 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const port = process.env.PORT || 8080;
-var http = require(‘http’).Server(app);
-var io = require(‘socket.io’)(http);
 const cors = require("cors");
+
 
 const Room = require("./chat.model");
 const User = require("./user.model");
