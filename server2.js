@@ -22,20 +22,27 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const corsOptions = {
-  origin: '*',
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  origin: "*",
+  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
 };
-// app.options('*', cors(corsOptions));
-app.use(cors(corsOptions));
 
 const io = require("socket.io")(server, {
-    cors: {
-       origin: '*',
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    },
-   allowEIO3: true,
- });
- 
+  cors: {
+    origin: [
+      "http://localhost:*",
+      "https://beta.dbeats.live ",
+      "https://dbeats.live ",
+    ],
+    transports: ["websocket", "polling"],
+    credentials: true,
+    allowedHeaders: ["Access-Control-Allow-Origin"],
+    methods: ["GET", "POST", "PUT"],
+  },
+  allowEIO3: true,
+});
+
+app.use(cors(corsOptions));
+
 app.get("/", (req, res) => {
   res.send("Chat Server is Working!");
 });
