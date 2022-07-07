@@ -4,29 +4,31 @@ const server = require("http").createServer(app);
 const port = process.env.PORT || 8000;
 const cors = require("cors");
 
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+};
+
 const io = require("socket.io")(server, {
-//   cors: {
-//     origin: [
-//       "http://localhost:*",
-//       "https://beta.dbeats.live ",
-//       "https://dbeats.live ",
-//     ],
-//     transports: ["websocket", "polling"],
-//     credentials: true,
-//     allowedHeaders: ["Access-Control-Allow-Origin"],
-//     methods: ["GET", "POST", "PUT"],
-//   },
-//   allowEIO3: true,
-// });
+  cors: {
+    origin: [
+      "http://localhost:*",
+      "https://beta.dbeats.live ",
+      "https://dbeats.live ",
+    ],
+    transports: ["websocket", "polling"],
+    credentials: true,
+    allowedHeaders: ["Access-Control-Allow-Origin"],
+    methods: ["GET", "POST", "PUT"],
+  },
+  allowEIO3: true,
+});
 
 // app.use(cors());
-  
-const corsOptions = {
-  origin: '*',
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-};
-// app.options('*', cors(corsOptions));
+
 app.use(cors(corsOptions));
+
+// app.options('*', cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("Live Viewer Working!");
