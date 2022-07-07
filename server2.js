@@ -1,7 +1,9 @@
 const express = require("express");
-const app = express();
-const server = require("http").createServer(app);
+const app = express(); 
 const port = process.env.PORT || 8080;
+
+import { createServer } from "http";
+import { Server } from "socket.io";
 // const server = require("http").createServer(app);
 // const port = process.env.PORT || 80;
 
@@ -26,20 +28,30 @@ const corsOptions = {
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
 };
 
-const io = require("socket.io")(server, {
+const httpServer = createServer();
+
+const io = new Server(httpServer, {
   cors: {
-    origin: [
-      "http://localhost:*",
-      "https://beta.dbeats.live ",
-      "https://dbeats.live ",
-    ],
-    transports: ["websocket", "polling"],
-    credentials: true,
+    origin: *,
     allowedHeaders: ["Access-Control-Allow-Origin"],
-    methods: ["GET", "POST", "PUT"],
-  },
-  allowEIO3: true,
+    credentials: true
+  }
 });
+
+// const io = require("socket.io")(server, {
+//   cors: {
+//     origin: [
+//       "http://localhost:*",
+//       "https://beta.dbeats.live ",
+//       "https://dbeats.live ",
+//     ],
+//     transports: ["websocket", "polling"],
+//     credentials: true,
+//     allowedHeaders: ["Access-Control-Allow-Origin"],
+//     methods: [ "POST, GET, OPTIONS, PUT, DELETE"],
+//   },
+//   allowEIO3: true,
+// });
 
 app.use(cors(corsOptions));
 
