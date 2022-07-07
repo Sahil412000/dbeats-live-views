@@ -1,19 +1,9 @@
 const express = require("express");
-const app = express(); 
+const app = express();
+const server = require("http").createServer(app);
 const port = process.env.PORT || 8080;
-
-import { createServer } from "http";
-import { Server } from "socket.io";
-// const server = require("http").createServer(app);
-// const port = process.env.PORT || 80;
-
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
-
-// server.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`);
-// });
+var http = require(‘http’).Server(app);
+var io = require(‘socket.io’)(http);
 const cors = require("cors");
 
 const Room = require("./chat.model");
@@ -23,37 +13,16 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const corsOptions = {
-  origin: "*",
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-};
-
-const httpServer = createServer();
-
-const io = new Server(httpServer, {
-  cors: {
-    origin: *,
-    allowedHeaders: ["Access-Control-Allow-Origin"],
-    credentials: true
-  }
-});
-
-// const io = require("socket.io")(server, {
-//   cors: {
-//     origin: [
-//       "http://localhost:*",
-//       "https://beta.dbeats.live ",
-//       "https://dbeats.live ",
-//     ],
-//     transports: ["websocket", "polling"],
-//     credentials: true,
-//     allowedHeaders: ["Access-Control-Allow-Origin"],
-//     methods: [ "POST, GET, OPTIONS, PUT, DELETE"],
-//   },
-//   allowEIO3: true,
-// });
-
+  
 app.use(cors(corsOptions));
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+  },
+  allowEIO3: true,
+});
 
 app.get("/", (req, res) => {
   res.send("Chat Server is Working!");
