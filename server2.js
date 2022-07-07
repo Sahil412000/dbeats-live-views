@@ -14,14 +14,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 
   
-app.use(cors(corsOptions));
+
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-  },
-  allowEIO3: true,
+    origin: "*"}
 });
 
 app.get("/", (req, res) => {
