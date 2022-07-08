@@ -4,17 +4,21 @@ const server = require("http").createServer(app);
 const port = process.env.PORT || 8000;
 const cors = require("cors");
 
-const corsOptions = {
-  origin: "*",
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-};
+// const corsOptions = {
+//   origin: "*",
+//   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+// };
+
+app.use(cors());
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*" }
+    origin: "https://beta.dbeats.live",
+    allowedHeaders: ["my-custom-header"],
+    credentials: true,
+  },
+  transports: ["websocket", "polling"],
 });
-
-// app.use(cors());
 
 //app.use(cors(corsOptions));
 

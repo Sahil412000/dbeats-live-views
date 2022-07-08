@@ -11,6 +11,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
+app.use(cors());
+
 const io = require("socket.io")(server, {
   cors: {
     origin: "https://beta.dbeats.live",
