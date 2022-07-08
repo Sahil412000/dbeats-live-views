@@ -4,7 +4,6 @@ const server = require("http").createServer(app);
 const port = process.env.PORT || 8080;
 const cors = require("cors");
 
-
 const Room = require("./chat.model");
 const User = require("./user.model");
 const LiveRoom = require("./livechat.model");
@@ -12,12 +11,13 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
-  
-
-
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*"}
+    origin: "https://beta.dbeats.live",
+    allowedHeaders: ["my-custom-header"],
+    credentials: true,
+  },
+  transports: ["websocket", "polling"],
 });
 
 app.get("/", (req, res) => {
