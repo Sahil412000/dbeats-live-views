@@ -15,9 +15,10 @@ const io = require("socket.io")(server, {
   cors: {
     origin: "https://beta.dbeats.live",
     allowedHeaders: ["my-custom-header"],
+    methods: ["GET", "POST"],
+    transports: ["websocket", "polling"],
     credentials: true,
   },
-  transports: ["websocket", "polling"],
 });
 
 //app.use(cors(corsOptions));
