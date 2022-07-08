@@ -11,34 +11,34 @@ const cors = require("cors");
 
 // app.use(cors(corsOptions));
 
-// const io = require("socket.io")(server, {
-//   cors: {
-//     origin: "https://beta.dbeats.live",
-//     allowedHeaders: ["my-custom-header"],
-//     methods: ["GET", "POST"],
-//     transports: ["websocket", "polling"],
-//     credentials: true,
-//   },
-// });
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "https://beta.dbeats.live",
+    allowedHeaders: ["my-custom-header"],
+    methods: ["GET", "POST"],
+    transports: ["websocket", "polling"],
+    credentials: true,
+  },
+});
 
 //app.use(cors(corsOptions));
 
 // app.options('*', cors(corsOptions));
 
-const io = require("socket.io")(server, {
-  cors: {
-    origin: [
-      "http://localhost:*",
-      "https://beta.dbeats.live ",
-      "https://dbeats.live ",
-    ],
-    transports: ["websocket", "polling"],
-    credentials: true,
-    allowedHeaders: ["Access-Control-Allow-Origin"],
-    methods: ["GET", "POST", "PUT"],
-  },
-  allowEIO3: true,
-});
+// const io = require("socket.io")(server, {
+//   cors: {
+//     origin: [
+//       "http://localhost:*",
+//       "https://beta.dbeats.live ",
+//       "https://dbeats.live ",
+//     ],
+//     transports: ["websocket", "polling"],
+//     credentials: true,
+//     allowedHeaders: ["Access-Control-Allow-Origin"],
+//     methods: ["GET", "POST", "PUT"],
+//   },
+//   allowEIO3: true,
+// });
 
 app.use(cors());
 
