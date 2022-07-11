@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 const cors = require("cors");
 
 const Room = require("./chat.model");
@@ -15,18 +15,18 @@ app.use(cors());
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://beta.dbeats.live",
-    allowedHeaders: ["my-custom-header"],
+    origin: "https://beta.mintflick.app",
+    methods: ["GET", "POST"],
+    transports: ["websocket", "polling"],
     credentials: true,
   },
-  transports: ["websocket", "polling"],
 });
 
 app.get("/", (req, res) => {
   res.send("Chat Server is Working!");
 });
 
-const uri = process.env["ATLAS_URI"];
+const uri = process.env.ATLAS_URI;
 mongoose.connect(uri);
 
 io.on("connection", (socket) => {
